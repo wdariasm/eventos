@@ -16,12 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url, include
-from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
+from django.views.generic import RedirectView
+from django.contrib.staticfiles.views import serve
 
 
 urlpatterns = [
+    url(r'^$', serve, kwargs={'path': 'index.html'}),
+    url(r'^(?!/?static/)(?P<path>.*\..*)$',
+    RedirectView.as_view(url='/static/%(path)s', permanent=False)),
     path('admin/', admin.site.urls),
     path('',include("eventos.api.urls")),
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path(r'api-token-auth/', obtain_jwt_token),
+    url( r'^(?P<path>.*)/$', serve, kwargs={'path': 'index.html'} ),
 ]
