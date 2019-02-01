@@ -1,0 +1,76 @@
+<div class="container-fluid">
+
+  <div class="row justify-content-md-center " style="margin-top: 2%">
+    <div class="col-md-6 col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          {{titulo}}
+        </div>
+        <div class="card-body">
+
+          <form name="frmEventos" ngNativeValidate (ngSubmit)="guardar()">
+            <div class="form-group">
+              <label for="txtName">Nombre *</label>
+              <input type="text" class="form-control" name="txtName" placeholder="Nombre" [(ngModel)]="eventos.name"
+                required [disabled]='!habilitarCampos'>
+            </div>
+
+            <div class="form-group">
+              <label for="cboCategory">Categoría *</label>
+              <select class="custom-select" name="cboCategory" [(ngModel)]="eventos.category" [disabled]='!habilitarCampos'>
+                <option selected value="Conferencia">Conferencia</option>
+                <option value="Seminario">Seminario</option>
+                <option value="Congreso">Congreso</option>
+                <option value="Curso">Curso</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="txtPlace">Lugar *</label>
+              <input type="text" class="form-control" name="txtPlace" placeholder="Lugar" [(ngModel)]="eventos.place"
+                required [disabled]='!habilitarCampos'>
+            </div>
+
+            <div class="form-group">
+              <label for="txtAddress">Dirección *</label>
+              <input type="text" class="form-control" name="txtAddress" placeholder="Dirección" [(ngModel)]="eventos.address"
+                required [disabled]='!habilitarCampos'>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <label for="txtStartDate">Fecha Inicio *</label>
+                <input type="date" class="form-control" name="txtStartDate" placeholder="Fecha Inicio" [(ngModel)]="eventos.start_date"
+                  required [disabled]='!habilitarCampos'>
+              </div>
+
+              <div class="col-md-6 form-group">
+                <label for="txtEndDate">Fecha Finalización *</label>
+                <input type="date" class="form-control" name="txtEndDate" placeholder="Fecha Fin" [(ngModel)]="eventos.end_date"
+                  required [disabled]='!habilitarCampos'>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="cboModalidad">Modalidad</label>
+              <select class="custom-select" name="cboModalidad" [(ngModel)]="eventos.modality" [disabled]='!habilitarCampos'>
+                <option selected value="Presencial">Presencial</option>
+                <option value="Virtual">Virtual</option>
+              </select>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <button type="button" class="btn btn-danger float-right" (click)="cancelar()">Cancelar</button>
+
+              </div>
+              <div class="col-md-6" *ngIf='habilitarCampos'>
+                <button type="submit" class="btn btn-success">Guardar</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
