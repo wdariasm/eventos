@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.globalService.GetUser();
-    if (this.globalService.IdUser != 0){
+    if (this.globalService.IdUser > 0){
       this.router.navigate(['/list']);
       return;
     }

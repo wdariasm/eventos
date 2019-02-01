@@ -17,7 +17,11 @@ export class ListEventosComponent implements OnInit {
 
   constructor(public eventService: EventosService, public globalService: GlobaldataService,
     private router: Router) { 
-    
+    this.globalService.GetUser();
+    if (this.globalService.IdUser == 0){
+      this.router.navigate(['/login']);
+      return;
+    }
   }
 
   ngOnInit() {
