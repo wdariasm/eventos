@@ -10,7 +10,7 @@ import { Evento, Usuario } from './evento';
 export class EventosService {
   public uri : string;
   constructor(public http: HttpClient) { 
-    this.uri = "http://127.0.0.1:8000/api";
+    this.uri = "http://localhost:8000/api";
   }
 
   get (id: number): Observable<any> {
