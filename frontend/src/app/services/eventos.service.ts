@@ -3,25 +3,23 @@ import { HttpClient , HttpHeaders } from '@angular/common/http';
 import { Observable } from  'rxjs';
 import { Evento, Usuario } from './evento';
 
-
 @Injectable({
   providedIn: 'root'
 })
 export class EventosService {
   public uri : string;
   constructor(public http: HttpClient) { 
-    this.uri = "http://localhost:8000/api";
+    //Url Pruebas
+    this.uri = "http://172.24.42.72:8000/api";
   }
 
   get (id: number): Observable<any> {
     return  this.http.get(this.uri+'/events/'+id);
   };
 
-
   getByUser (userId: number): Observable<any> {
     return  this.http.get(this.uri+'/events/user/'+  userId );
   };
-
 
   post (evento: Evento): Observable<any> {
     let data  = JSON.stringify(evento);
