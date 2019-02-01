@@ -2,10 +2,6 @@ from eventos.api.serializers import *
 from rest_framework.decorators import *
 from rest_framework.response import Response
 from rest_framework import status, viewsets
-
-from django.contrib.auth import authenticate
-from django.views.decorators.csrf import csrf_exempt
-from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
 
@@ -29,21 +25,6 @@ def login(request):
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-
-    @action(methods='post', detail=True, name='crear usuario', url_path='add')
-    def crearUsuario(self, request):
-        _user = self.get_object()
-        serializer = UserSerializer(data=request.data, many=True)
-        if serializer.is_valid():
-            valid_User: User = User.objects.filter(email=_user['email']);
-            if valid_User is None:
-                _user.save()
-                return Response( {'message': 'Usuario creado correctamente', 'estado': 'true'}, status.HTTP_200_OK )
-            else:
-                return Response( {'message': 'Usuario  se encuentra registrado', 'estado': 'false'},
-                                 status.HTTP_200_OK )
-
-        return Response( serializer.errors, status=status.HTTP_400_BAD_REQUEST )
 
 
 class EventsList(viewsets.ModelViewSet):
